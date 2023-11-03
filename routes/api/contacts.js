@@ -3,10 +3,12 @@ const router = express.Router();
 const contactsController = require('../../controllers/contactsController');
 const {isEmptyBody} = require('../../middlewares/index');
 const {validateBody} = require("../../decorators");
-const {isValidId} = require("../../middlewares");
+const {isValidId, authenticate} = require("../../middlewares");
 const {updateStatusContactSchema} = require("../../models/Contact");
 
 const updateStatusContact = validateBody(updateStatusContactSchema);
+
+router.use(authenticate);
 
 router.get('/', contactsController.getAll )
 
@@ -18,6 +20,6 @@ router.delete('/:contactId', isValidId, contactsController.deleteContact )
 
 router.put('/:contactId', isValidId, isEmptyBody, contactsController.updateContact )
 
-router.patch('/:contactId/favorite', isValidId, isEmptyBody, updateStatusContact, contactsController.updateContact )
+router.patch('/:contactId/favorite', isValidId, isEmptyBody, updateStatusContact, contactsController.updateStatusContact )
 
 module.exports = router
