@@ -5,17 +5,17 @@ const Joi = require ('joi');
 const contactSchema = new Schema({
     name: {
         type: String,
-        required: [true, 'Set name for contact'],
+        required: [true, 'Set name for contact']
     },
     email: {
-        type: String,
+        type: String
     },
     phone: {
-        type: String,
+        type: String
     },
     favorite: {
         type: Boolean,
-        default: false,
+        default: false
     },
     owner: {
         type: Schema.Types.ObjectId,
